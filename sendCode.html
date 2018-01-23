@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="">
+			<label>手机号</label>
+			<input type="text" name="phone" id="tel"/>
+			<input type="button" name="btnSendCode" id="btnSendCode" value="获取验证码"/>
+		</form>
+		<script src="../../郝阳洁JQuery/js/jquery-3.2.1.js"></script>
+		<script>
+			
+			$('#btnSendCode').on('click',function(){
+				var count = 60;
+				var nowconut; //剩余时间
+				var tel = $('#tel').val();				
+				var reg = /(\+86|0086)?\s*1[34578]\d{9}/;
+				if(!reg.test(tel)|| tel==''){
+					alert('手机号格式不正确')
+				}else{
+					nowconut = count;
+					document.getElementById("btnSendCode").setAttribute('disabled','true');//设置禁用
+					document.getElementById("btnSendCode").value = nowconut+'后获取';
+					intervalobj = window.setInterval(remainTime,1000)
+				}
+				
+				function remainTime(){
+					if(nowconut==0){
+						window.clearInterval(intervalobj)
+						document.getElementById("btnSendCode").removeAttribute('disabled');//移除禁用
+						document.getElementById("btnSendCode").value = '重新获取';
+					}else{
+						nowconut--;
+						document.getElementById("btnSendCode").value = nowconut+'后获取';
+					}
+				}
+				
+			})
+				
+			
+		</script>
+	</body>
+</html>
